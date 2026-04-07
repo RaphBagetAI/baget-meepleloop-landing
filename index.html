@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MeepleLoop - Structured Playtest Feedback for Indie Board Game Designers</title>
+  <meta name="description" content="MeepleLoop helps indie board game designers get reliable, structured playtest feedback on demand from curated beta testers, so they can find the fun faster and stop wasting weeks chasing low-signal feedback." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFFFF;
+      color: #1A202C;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: #2563EB;
+      text-decoration: none;
+    }
+
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid #E2E8F0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #2563EB;
+      letter-spacing: -0.02em;
+    }
+
+    main {
+      margin-top: 48px;
+      margin-bottom: 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #111827;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      margin-bottom: 24px;
+      color: #4B5563;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: #2563EB;
+      color: #ffffff;
+      padding: 14px 32px;
+      font-weight: 600;
+      font-size: 1.125rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgb(37 99 235 / 0.4);
+      transition: background-color 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: #1D4ED8;
+      box-shadow: 0 6px 20px rgb(29 78 216 / 0.6);
+      outline: none;
+    }
+
+    section {
+      margin-bottom: 64px;
+    }
+
+    h3 {
+      font-size: 1.625rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: #111827;
+      border-left: 4px solid #2563EB;
+      padding-left: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .feature {
+      background: #F9FAFB;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .feature h4 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: #1E40AF;
+    }
+
+    .feature p {
+      flex-grow: 1;
+      color: #374151;
+      font-size: 1rem;
+    }
+
+    .how-it-works ol {
+      counter-reset: step-counter;
+      list-style: none;
+      padding-left: 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .how-it-works ol li {
+      counter-increment: step-counter;
+      margin-bottom: 24px;
+      background: #F3F4F6;
+      padding: 20px 24px;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #374151;
+      position: relative;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+      line-height: 1.4;
+    }
+
+    .how-it-works ol li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: -48px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #2563EB;
+      color: white;
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+      box-shadow: 0 2px 6px rgb(37 99 235 / 0.45);
+    }
+
+    form {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    input[type="email"] {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid #CBD5E1;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: #2563EB;
+      box-shadow: 0 0 6px rgb(37 99 235 / 0.5);
+    }
+
+    button[type="submit"] {
+      background-color: #2563EB;
+      border: none;
+      color: white;
+      padding: 14px 0;
+      font-weight: 700;
+      font-size: 1.125rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgb(37 99 235 / 0.4);
+      transition: background-color 0.2s ease;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background-color: #1D4ED8;
+      box-shadow: 0 6px 20px rgb(29 78 216 / 0.6);
+      outline: none;
+    }
+
+    .testimonial-placeholder {
+      text-align: center;
+      font-style: italic;
+      color: #6B7280;
+      margin-top: 8px;
+      padding: 40px 20px;
+      background-color: #EDF2F7;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.05);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: #94A3B8;
+      font-size: 0.875rem;
+      border-top: 1px solid #E2E8F0;
+      margin-top: 80px;
+    }
+
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .feature {
+        padding: 16px;
+      }
+
+      .how-it-works ol li {
+        font-size: 1rem;
+        padding: 16px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MeepleLoop</h1>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <h2>A curated community of vetted beta testers delivering structured playtest feedback for indie board game designers.</h2>
+      <p>Get reliable, actionable feedback on your board game prototype faster—stop chasing playtesters and start iterating weekly.</p>
+      <a href="#signup" class="btn-primary" aria-label="Join the waitlist for MeepleLoop">Join the Waitlist</a>
+    </section>
+
+    <section>
+      <h3>How MeepleLoop Works</h3>
+      <ol class="how-it-works">
+        <li>Submit your prototype and specify your playtest needs.</li>
+        <li>Our curated testers matched by game type and experience play and review your game.</li>
+        <li>Receive structured, detailed feedback within days to iterate faster.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Designed to Solve Your Biggest Playtesting Challenges</h3>
+      <div class="grid-3">
+        <article class="feature">
+          <h4>Consistent Tester Access</h4>
+          <p>Never scramble to find testers. Our vetted community is ready when you need playtests, matched by your prototype’s style.</p>
+        </article>
+        <article class="feature">
+          <h4>Structured, Actionable Feedback</h4>
+          <p>Get honest, detailed notes on what works, what’s confusing, and what needs fixing—not just vague impressions.</p>
+        </article>
+        <article class="feature">
+          <h4>Repeatable Iteration Cycle</h4>
+          <p>Keep improving with matched repeat testers who track your game’s evolution and give feedback over multiple sessions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h3>What Early Users Say</h3>
+      <div class="testimonial-placeholder">
+        "Coming soon: real testimonials from our early designers and testers, showing how MeepleLoop speeds up game iteration and feedback quality."
+      </div>
+    </section>
+
+    <section id="signup">
+      <h3>Join the Waitlist</h3>
+      <form id="signup-form" novalidate>
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" aria-describedby="emailHelp" />
+        <button type="submit">Request Early Access</button>
+        <p id="status-message" role="alert" aria-live="polite" style="margin-top: 16px; color: #2563EB; font-weight: 600;"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 MeepleLoop — Indie board game playtest feedback platform
+  </footer>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const emailInput = document.getElementById('email');
+    const statusMsg = document.getElementById('status-message');
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      statusMsg.textContent = '';
+
+      const email = emailInput.value.trim();
+      const emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+      if (!emailValid) {
+        statusMsg.textContent = 'Please enter a valid email address.';
+        statusMsg.style.color = '#DC2626';
+        return;
+      }
+
+      try {
+        // Simulate API call to store email for waitlist
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        statusMsg.textContent = 'Thanks for requesting early access! We will be in touch soon.';
+        statusMsg.style.color = '#16A34A';
+        form.reset();
+      } catch (error) {
+        statusMsg.textContent = 'Oops, something went wrong. Please try again later.';
+        statusMsg.style.color = '#DC2626';
+      }
+    });
+  </script>
+</body>
+</html>
